@@ -1,1 +1,1 @@
-# go-util-slice
+# go-slice
