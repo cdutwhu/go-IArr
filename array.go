@@ -2,48 +2,6 @@ package wrappers
 
 import "sort"
 
-// // IArr2GArr :
-// func IArr2GArr(arr IArr) (rst []interface{}) {
-// 	L := arr.L()
-// 	for i := 0; i < L; i++ {
-// 		a := arr.At(i)
-// 		rst = append(rst, a)
-// 	}
-// 	return
-// }
-
-// IArr2Strs :
-func IArr2Strs(arr IArr) (rst []string) {
-	L := arr.Len()
-	rst = make([]string, L)
-	for i := 0; i < L; i++ {
-		rst[i] = arr.At(i).(string)
-	}
-	return
-}
-
-// IArr2Ints :
-func IArr2Ints(arr IArr) (rst []int) {
-	L := arr.Len()
-	rst = make([]int, L)
-	for i := 0; i < L; i++ {
-		rst[i] = arr.At(i).(int)
-	}
-	return
-}
-
-// IArr2Int64s :
-func IArr2Int64s(arr IArr) (rst []int64) {
-	L := arr.Len()
-	rst = make([]int64, L)
-	for i := 0; i < L; i++ {
-		rst[i] = arr.At(i).(int64)
-	}
-	return
-}
-
-// ************************************************************************************************************
-
 // IArrSearch :
 func IArrSearch(arr IArr, chk func(int, interface{}) (bool, interface{})) (ok bool, indices []int, rst GArr) {
 	L := arr.Len()
