@@ -9,7 +9,7 @@ const (
 
 type INum interface {
 	V() interface{}
-	DF() float64
+	F64() float64
 }
 
 // **********************************************************************
@@ -20,7 +20,7 @@ type C32 rune
 func (a C32) V() interface{} {
 	return a
 }
-func (a C32) DF() float64 {
+func (a C32) F64() float64 {
 	return float64(a)
 }
 
@@ -32,7 +32,7 @@ type I32 int
 func (a I32) V() interface{} {
 	return a
 }
-func (a I32) DF() float64 {
+func (a I32) F64() float64 {
 	return float64(a)
 }
 
@@ -44,7 +44,7 @@ type I64 int64
 func (a I64) V() interface{} {
 	return a
 }
-func (a I64) DF() float64 {
+func (a I64) F64() float64 {
 	return float64(a)
 }
 
@@ -56,7 +56,7 @@ type F32 float32
 func (a F32) V() interface{} {
 	return a
 }
-func (a F32) DF() float64 {
+func (a F32) F64() float64 {
 	return float64(a)
 }
 
@@ -68,6 +68,6 @@ type F64 float64
 func (a F64) V() interface{} {
 	return a
 }
-func (a F64) DF() float64 {
+func (a F64) F64() float64 {
 	return float64(a)
 }
