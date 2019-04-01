@@ -3,7 +3,8 @@ package wrappers
 import "sort"
 
 // IArrSearch :
-func IArrSearch(arr IArr, chk func(int, interface{}) (bool, interface{})) (ok bool, indices []int, rst GArr) {
+func IArrSearch(arr IArr, chk func(int, interface{}) (bool, interface{})) (ok bool, indices []int, slice interface{}) {
+	rst := GArr{}
 	L := arr.Len()
 	for i := 0; i < L; i++ {
 		a := arr.At(i)
@@ -11,11 +12,12 @@ func IArrSearch(arr IArr, chk func(int, interface{}) (bool, interface{})) (ok bo
 			ok, indices, rst = true, append(indices, i), append(rst, a)
 		}
 	}
-	return
+	return ok, indices, rst.Slice()
 }
 
 // IArrInsert :
-func IArrInsert(arr IArr, it InsertType, chk func(int, interface{}) (bool, interface{})) (ok bool, indices []int, rst GArr) {
+func IArrInsert(arr IArr, it InsertType, chk func(int, interface{}) (bool, interface{})) (ok bool, indices []int, slice interface{}) {
+	rst := GArr{}
 	L := arr.Len()
 	for i := 0; i < L; i++ {
 		a := arr.At(i)
@@ -32,11 +34,12 @@ func IArrInsert(arr IArr, it InsertType, chk func(int, interface{}) (bool, inter
 			}
 		}
 	}
-	return
+	return ok, indices, rst.Slice()
 }
 
 // IArrRemove :
-func IArrRemove(arr IArr, chk func(int, interface{}) (bool, interface{})) (ok bool, indices []int, dels, remain GArr) {
+func IArrRemove(arr IArr, chk func(int, interface{}) (bool, interface{})) (ok bool, indices []int, dels, slice interface{}) {
+	remain := GArr{}
 	if ok, indices, dels = IArrSearch(arr, chk); ok {
 		L := arr.Len()
 		for i := 0; i < L; i++ {
@@ -47,11 +50,12 @@ func IArrRemove(arr IArr, chk func(int, interface{}) (bool, interface{})) (ok bo
 			remain = append(remain, a)
 		}
 	}
-	return
+	return ok, indices, dels, remain.Slice()
 }
 
 // IArrReplace :
-func IArrReplace(arr IArr, chk func(int, interface{}) (bool, interface{})) (ok bool, indices []int, old, rst GArr) {
+func IArrReplace(arr IArr, chk func(int, interface{}) (bool, interface{})) (ok bool, indices []int, old, slice interface{}) {
+	rst := GArr{}
 	if ok, indices, old = IArrSearch(arr, chk); ok {
 		L := arr.Len()
 		for i := 0; i < L; i++ {
@@ -63,11 +67,12 @@ func IArrReplace(arr IArr, chk func(int, interface{}) (bool, interface{})) (ok b
 			}
 		}
 	}
-	return
+	return ok, indices, old, rst.Slice()
 }
 
 // IArrRmRep :
-func IArrRmRep(arr IArr) (rst GArr) {
+func IArrRmRep(arr IArr) (slice interface{}) {
+	rst := GArr{}
 	L := arr.Len()
 OUTER:
 	for i := 0; i < L; i++ {
@@ -79,7 +84,7 @@ OUTER:
 		}
 		rst = append(rst, a)
 	}
-	return
+	return rst.Slice()
 }
 
 // IArrCtns :

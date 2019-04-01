@@ -36,7 +36,6 @@ func (arr GArr) Swap(i, j int) {
 	arr[i], arr[j] = arr[j], arr[i]
 }
 func (arr GArr) Less(i, j int) bool {
-	// PC(FunSortLess == nil, fEf("Set func(interface{}, interface{}) bool before using sort"))
 	return FunSortLess(arr[i], arr[j])
 }
 func (arr GArr) Slice() interface{} {
@@ -65,7 +64,6 @@ func (arr Strs) Swap(i, j int) {
 	arr[i], arr[j] = arr[j], arr[i]
 }
 func (arr Strs) Less(i, j int) bool {
-	// PC(FunSortLess == nil, fEf("Set func(interface{}, interface{}) bool before using sort"))
 	return FunSortLess(arr[i], arr[j])
 }
 
@@ -83,7 +81,6 @@ func (arr I32s) Swap(i, j int) {
 	arr[i], arr[j] = arr[j], arr[i]
 }
 func (arr I32s) Less(i, j int) bool {
-	// PC(FunSortLess == nil, fEf("Set func(interface{}, interface{}) bool before using sort"))
 	return FunSortLess(arr[i], arr[j])
 }
 
@@ -101,7 +98,6 @@ func (arr I64s) Swap(i, j int) {
 	arr[i], arr[j] = arr[j], arr[i]
 }
 func (arr I64s) Less(i, j int) bool {
-	// PC(FunSortLess == nil, fEf("Set func(interface{}, interface{}) bool before using sort"))
 	return FunSortLess(arr[i], arr[j])
 }
 
@@ -119,7 +115,6 @@ func (arr F32s) Swap(i, j int) {
 	arr[i], arr[j] = arr[j], arr[i]
 }
 func (arr F32s) Less(i, j int) bool {
-	// PC(FunSortLess == nil, fEf("Set func(interface{}, interface{}) bool before using sort"))
 	return FunSortLess(arr[i], arr[j])
 }
 
@@ -137,7 +132,6 @@ func (arr F64s) Swap(i, j int) {
 	arr[i], arr[j] = arr[j], arr[i]
 }
 func (arr F64s) Less(i, j int) bool {
-	// PC(FunSortLess == nil, fEf("Set func(interface{}, interface{}) bool before using sort"))
 	return FunSortLess(arr[i], arr[j])
 }
 
@@ -155,6 +149,5 @@ func (arr C32s) Swap(i, j int) {
 	arr[i], arr[j] = arr[j], arr[i]
 }
 func (arr C32s) Less(i, j int) bool {
-	// PC(FunSortLess == nil, fEf("Set func(interface{}, interface{}) bool before using sort"))
 	return FunSortLess(arr[i], arr[j])
 }
