@@ -16,8 +16,8 @@ func TestSearch(t *testing.T) {
 func TestInsert(t *testing.T) {
 	// arr := I32s{1, 2, 3, 4, 5}
 	arr := Strs{"a", "b", "c", "d"}
-	fPln(IArrInsert(arr, IT_BEFORE, func(i int, a interface{}) (bool, interface{}) { return i == 0 || i == 1 || a == "d", a.(string) + "1" }))
-	fPln(IArrInsert(arr, IT_AFTER, func(i int, a interface{}) (bool, interface{}) { return i == 0 || i == 1 || a == "d", a.(string) + "2" }))
+	fPln(IArrInsert(arr, INSERT_BEFORE, func(i int, a interface{}) (bool, interface{}) { return i == 0 || i == 1 || a == "d", a.(string) + "1" }))
+	fPln(IArrInsert(arr, INSERT_AFTER, func(i int, a interface{}) (bool, interface{}) { return i == 0 || i == 1 || a == "d", a.(string) + "2" }))
 }
 
 func TestRemove(t *testing.T) {
@@ -59,15 +59,16 @@ func TestOrder(t *testing.T) {
 	fPln(arr1)
 }
 
-// func TestAllAreIdentical(t *testing.T) {
-// 	arr := ToGA("abc", "abc", "abc")
-// 	fPln(arr.AllAreIdentical())
-// }
+func TestSameEle(t *testing.T) {
+	arr := Strs{"abc", "abc", "abc"}
+	fPln(IArrIsSameEle(arr))
+}
 
-// func TestInterSecANDUnion(t *testing.T) {
-// 	arr := ToGA("::", "abc", "def", "mn", "A")
-// 	r1 := arr.InterSec("abcd", "def", "::", "A")
-// 	fPln(r1)
-// 	r2 := arr.Union("abcd", "def", "::", "B")
-// 	fPln(r2)
-// }
+func TestInterSecANDUnion(t *testing.T) {
+	arr1 := Strs{"::", "abcd", "def", "mn", "A", "C"}
+	arr2 := Strs{"abcd", "def", "::", "A", "B", "D"}
+	r := IArrIntersect(arr1, arr2)
+	fPln(r.([]string))
+	r = IArrUnion(arr1, arr2)
+	fPln(r.([]string))
+}

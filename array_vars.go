@@ -9,15 +9,14 @@ type (
 )
 
 const (
-	IT_BEFORE InsertType = 1
-	IT_AFTER  InsertType = 2
+	INSERT_BEFORE, INSERT_AFTER InsertType = 1, 2
 )
 
 type IArr interface {
 	Len() int
-	At(int) interface{}
 	Swap(int, int)
 	Less(int, int) bool
+	At(int) interface{}
 }
 
 var FunSortLess func(interface{}, interface{}) bool

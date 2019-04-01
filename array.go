@@ -22,12 +22,12 @@ func IArrInsert(arr IArr, it InsertType, chk func(int, interface{}) (bool, inter
 	for i := 0; i < L; i++ {
 		a := arr.At(i)
 		switch it {
-		case IT_BEFORE:
+		case INSERT_BEFORE:
 			if yes, item := chk(i, a); yes {
 				ok, indices, rst = true, append(indices, i), append(rst, item)
 			}
 			rst = append(rst, a)
-		case IT_AFTER:
+		case INSERT_AFTER:
 			rst = append(rst, a)
 			if yes, item := chk(i, a); yes {
 				ok, indices, rst = true, append(indices, i), append(rst, item)
@@ -110,73 +110,50 @@ func IArrSeqCtns(arr IArr, others ...interface{}) bool {
 	return sort.IntsAreSorted(ps)
 }
 
-// // AllAreIdentical :
-// func (ga GArr) AllAreIdentical() bool {
-// 	if ga.L() > 1 {
-// 		for _, a := range ga {
-// 			if ga[0] != a {
-// 				return false
-// 			}
-// 		}
-// 	}
-// 	return true
-// }
+// IArrIsSameEle :
+func IArrIsSameEle(arr IArr) bool {
+	L := arr.Len()
+	for i := 0; i < L; i++ {
+		if arr.At(i) != arr.At(0) {
+			return false
+		}
+	}
+	return true
+}
 
-// // InterSec :
-// func (ga GArr) InterSec(items ...interface{}) (r []interface{}) {
-// NEXT:
-// 	for _, g := range ga {
-// 		for _, item := range items {
-// 			if g == item {
-// 				r = append(r, g)
-// 				continue NEXT
-// 			}
-// 		}
-// 	}
-// 	return
-// }
+// IArrIntersect :
+func IArrIntersect(arr1, arr2 IArr) interface{} {
+	L1, L2 := arr1.Len(), arr2.Len()
+	rst := GArr{}
+NEXT:
+	for i := 0; i < L1; i++ {
+		a1 := arr1.At(i)
+		for j := 0; j < L2; j++ {
+			if a1 == arr2.At(j) {
+				rst = append(rst, a1)
+				continue NEXT
+			}
+		}
+	}
+	return rst.Slice()
+}
 
-// // Union :
-// func (ga GArr) Union(items ...interface{}) (r []interface{}) {
-// 	for _, g := range ga {
-// 		r = append(r, g)
-// 	}
-// 	rOri := make([]interface{}, len(r))
-// 	copy(rOri, r)
-// NEXT:
-// 	for _, item := range items {
-// 		for _, rItem := range rOri {
-// 			if item == rItem {
-// 				continue NEXT
-// 			}
-// 		}
-// 		r = append(r, item)
-// 	}
-// 	return
-// }
-
-// /**********************************************************/
-
-// // ToStrs :
-// func (ga GArr) ToStrs() (r []string) {
-// 	for _, a := range ga {
-// 		r = append(r, a.(string))
-// 	}
-// 	return
-// }
-
-// // ToInts :
-// func (ga GArr) ToInts() (r []int) {
-// 	for _, a := range ga {
-// 		r = append(r, a.(int))
-// 	}
-// 	return
-// }
-
-// // ToInt64s :
-// func (ga GArr) ToInt64s() (r []int64) {
-// 	for _, a := range ga {
-// 		r = append(r, a.(int64))
-// 	}
-// 	return
-// }
+// IArrUnion :
+func IArrUnion(arr1, arr2 IArr) interface{} {
+	L1, L2 := arr1.Len(), arr2.Len()
+	rst := make(GArr, L1, L1+L2)
+	for i := 0; i < L1; i++ {
+		rst[i] = arr1.At(i)
+	}
+NEXT:
+	for j := 0; j < L2; j++ {
+		a2 := arr2.At(j)
+		for i := 0; i < L1; i++ {
+			if a2 == arr1.At(i) {
+				continue NEXT
+			}
+		}
+		rst = append(rst, a2)
+	}
+	return rst.Slice()
+}
