@@ -402,9 +402,20 @@ func (s Str) RmSuffix(suffix string) Str {
 }
 
 // RmTailFromLast : e.g. "AB.CD.EF"(".") => "AB.CD"                                                &
-func (s Str) RmTailFromLast(tail string) Str {
-	if i := s.LIdx(tail); i >= 0 {
+func (s Str) RmTailFromLast(mark string) Str {
+	if i := s.LIdx(mark); i >= 0 {
 		return s.S(0, i)
+	}
+	return s
+}
+
+// RmHeadToLast : e.g. "AB.CD.EF"(".") => "EF"                                                     &
+func (s Str) RmHeadToLast(mark string) Str {
+	if i := s.LIdx(mark); i >= 0 {
+		if i < s.L()-1 {
+			return s.S(i+1, ALL)
+		}
+		return ""
 	}
 	return s
 }
