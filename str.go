@@ -411,9 +411,10 @@ func (s Str) RmTailFromLast(mark string) Str {
 
 // RmHeadToLast : e.g. "AB.CD.EF"(".") => "EF"                                                     &
 func (s Str) RmHeadToLast(mark string) Str {
+	mL := Str(mark).L()
 	if i := s.LIdx(mark); i >= 0 {
-		if i < s.L()-1 {
-			return s.S(i+1, ALL)
+		if i < s.L()-mL {
+			return s.S(i+mL, ALL)
 		}
 		return ""
 	}
