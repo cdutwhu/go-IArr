@@ -1,6 +1,29 @@
 package wrappers
 
-import "sort"
+import (
+	"reflect"
+	"sort"
+)
+
+// IArrEleIn :
+func IArrEleIn(ele interface{}, arr IArr) bool {
+	L := arr.Len()
+	if L == 0 {
+		return false
+	}
+	a0 := arr.At(0)
+	tInput := reflect.TypeOf(ele)
+	tArrEle := reflect.TypeOf(a0)
+	PC(tInput != tArrEle, fEf("input element is <%v>, arr's element type is <%v>. Cannot compare!", tInput, tArrEle))
+
+	for i := 0; i < L; i++ {
+		a := arr.At(i)
+		if ele == a {
+			return true
+		}
+	}
+	return false
+}
 
 // IArrSearchOne :
 func IArrSearchOne(arr IArr, chk func(int, interface{}) (bool, interface{})) (ok bool, index int, rst interface{}) {

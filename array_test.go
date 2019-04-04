@@ -8,11 +8,23 @@ import (
 func TestSearch(t *testing.T) {
 	// arr := I32s{1, 2, 3, 4, 5}
 	// arr := Strs{"a", "b", "c", "d", "b"}
-	arr := F64s{1, 2, 3, 4, 5.5, 6, 7}
-	ok1, index, rst1 := IArrSearchOne(arr, func(i int, a interface{}) (bool, interface{}) { return a == 5.5 || a == "b", "junk" })
-	fPln(ok1, index, rst1.(float64))
-	ok, indices, rst := IArrSearch(arr, func(i int, a interface{}) (bool, interface{}) { return i == 0 || i == 2 || a == "b", "junk" })
-	fPln(ok, indices, rst.([]float64))
+
+	arr := F64s{1, 2, 3, 4, 5.5, 1, 6, 7, 4}
+	fPln(IArrEleIn(float64(3), arr))
+
+	ok1, index, rst1 := IArrSearchOne(arr, func(i int, a interface{}) (bool, interface{}) { return a == float64(4), "junk" })
+	if ok1 {
+		fPln(ok1, index, rst1.(float64))
+	} else {
+		fPln("no")
+	}
+
+	ok, indices, rst := IArrSearch(arr, func(i int, a interface{}) (bool, interface{}) { return a == float64(1), "junk" })
+	if ok {
+		fPln(ok, indices, rst.([]float64))
+	} else {
+		fPln("no")
+	}
 }
 
 func TestInsert(t *testing.T) {
