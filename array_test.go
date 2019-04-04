@@ -9,6 +9,8 @@ func TestSearch(t *testing.T) {
 	// arr := I32s{1, 2, 3, 4, 5}
 	// arr := Strs{"a", "b", "c", "d", "b"}
 	arr := F64s{1, 2, 3, 4, 5.5, 6, 7}
+	ok1, index, rst1 := IArrSearchOne(arr, func(i int, a interface{}) (bool, interface{}) { return a == 5.5 || a == "b", "junk" })
+	fPln(ok1, index, rst1.(float64))
 	ok, indices, rst := IArrSearch(arr, func(i int, a interface{}) (bool, interface{}) { return i == 0 || i == 2 || a == "b", "junk" })
 	fPln(ok, indices, rst.([]float64))
 }

@@ -2,6 +2,19 @@ package wrappers
 
 import "sort"
 
+// IArrSearchOne :
+func IArrSearchOne(arr IArr, chk func(int, interface{}) (bool, interface{})) (ok bool, index int, rst interface{}) {
+	L := arr.Len()
+	for i := 0; i < L; i++ {
+		a := arr.At(i)
+		if yes, _ := chk(i, a); yes {
+			ok, index, rst = true, i, a
+			return
+		}
+	}
+	return false, -1, nil
+}
+
 // IArrSearch :
 func IArrSearch(arr IArr, chk func(int, interface{}) (bool, interface{})) (ok bool, indices []int, slice interface{}) {
 	rst := GArr{}
