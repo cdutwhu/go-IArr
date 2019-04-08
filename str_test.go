@@ -282,10 +282,10 @@ func TestIsXML(t *testing.T) {
 	// fPln(s.IsXMLSegSimple())
 }
 
-// func TestFieldsSeqContain(t *testing.T) {
-// 	s0 := Str("-RefId + LocalId + StateProvinceId + OtherIdList + PersonInfo + Title + EmploymentStatus + MostRecent")
-// 	fPln(s0.FieldsSeqContain("-RefId + LocalId + StateProvinceId + OtherIdList + PersonInfo + Title + EmploymentStatus + MostRecent", " + "))
-// }
+func TestFieldsSeqContain(t *testing.T) {
+	s0 := Str("-RefId + LocalId + StateProvinceId + OtherIdList + PersonInfo + Title + EmploymentStatus + MostRecent")
+	fPln(s0.FieldsSeqCtn("-RefId + StateProvinceId + Title + PersonInfo + EmploymentStatus + MostRecent", " + "))
+}
 
 func TestIsUUID(t *testing.T) {
 	fPln(Str("fbd3036f-0f1c-4e98-b71c-d4cd61213f93").IsUUID())

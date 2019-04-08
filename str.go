@@ -773,8 +773,9 @@ func (s Str) IsUUID() bool {
 	return e == nil
 }
 
-// // FieldsSeqContain :
-// func (s Str) FieldsSeqContain(str, sep string) bool {
-// 	sArr0, sArr1 := sSpl(s.V(), sep), sSpl(str, sep)
-// 	return Strs(sArr0).ToG().SeqContain(Strs(sArr1).ToG())
-// }
+// FieldsSeqCtn :
+func (s Str) FieldsSeqCtn(str, sep string) bool {
+	sArr0, sArr1 := sSpl(s.V(), sep), sSpl(str, sep)
+	gArr1 := IArr2GArr(Strs(sArr1))
+	return IArrSeqCtns(Strs(sArr0), gArr1...)	
+}

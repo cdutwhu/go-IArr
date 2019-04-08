@@ -5,6 +5,16 @@ import (
 	"sort"
 )
 
+// IArr2GArr :
+func IArr2GArr(arr IArr) (garr []interface{}) {
+	L := arr.Len()
+	garr = make([]interface{}, L)
+	for i := 0; i < L; i++ {
+		garr[i] = arr.At(i)
+	}
+	return
+}
+
 // IArrEleIn :
 func IArrEleIn(ele interface{}, arr IArr) bool {
 	L := arr.Len()
