@@ -20,6 +20,9 @@ func TestBasic(t *testing.T) {
 	if s.S(1, ALL-2).V() != "trait ’ Islander 最 Peoples 1’2  最 connection" {
 		t.Errorf("s.S() error\n")
 	}
+	if s.STo("A").V() != "Strait ’ Islander 最 Peoples 1’2  最 connections最" {
+		t.Errorf("s.STo() error\n")
+	}
 	if s.C(LAST) != '最' {
 		t.Errorf("s.C() error\n")
 	}

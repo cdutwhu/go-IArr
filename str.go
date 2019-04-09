@@ -70,6 +70,14 @@ func (s Str) S(from, to int, strlen ...int) Str {
 	// return Str([]rune(s.V())[from:to]) //            ** slow **
 }
 
+// STo :
+func (s Str) STo(to string) Str {
+	if p := s.Idx(to); p >= 0 {
+		return s.S(0, p)
+	}
+	return s
+}
+
 // SegRep : replace a section of a string                    $
 func (s Str) SegRep(from, to int, seg string) Str {
 	L := s.L()
