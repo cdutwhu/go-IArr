@@ -740,14 +740,20 @@ func (s Str) SearchStrsIgnore(aims ...string) (ok bool, start, end int) {
 
 // SearchAny2StrsIgnore :
 func (s Str) SearchAny2StrsIgnore(fstArr, scdArr []string, ignore string) (bool, int, int) {
+	OK, starts, ends := false, I32s{}, I32s{}
 	for _, fst := range fstArr {
 		for _, scd := range scdArr {
 			if ok, start, end := s.Search2StrsIgnore(fst, scd, ignore); ok {
-				return true, start, end
+				OK, starts, ends = true, append(starts, start), append(ends, end)
 			}
 		}
 	}
-	return false, -1, -1
+	smin, _ := Min(starts, "")
+	emin, _ := Min(ends, "")
+	if OK {
+		return OK, smin.(int), emin.(int)
+	}
+	return OK, -1, -1
 }
 
 // // IsXMLSegSimple :
@@ -777,5 +783,5 @@ func (s Str) IsUUID() bool {
 func (s Str) FieldsSeqCtn(str, sep string) bool {
 	sArr0, sArr1 := sSpl(s.V(), sep), sSpl(str, sep)
 	gArr1 := IArr2GArr(Strs(sArr1))
-	return IArrSeqCtns(Strs(sArr0), gArr1...)	
+	return IArrSeqCtns(Strs(sArr0), gArr1...)
 }

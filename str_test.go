@@ -88,7 +88,7 @@ func TestSearchStrsIgnore(t *testing.T) {
 
 func TestSearchAny2StrsIgnore(t *testing.T) {
 
-	fPln(Str("ab C 最t : 最	3 de C d e C. 最t * d : 最 1 e最td #* e *#  #").SearchAny2StrsIgnore([]string{":"}, []string{"1", "2"}, " \t最"))
+	fPln(Str("ab C 最t : 最	2 de C d e C. 最t * d : 最 1 e最td #* e *#  #").SearchAny2StrsIgnore([]string{":"}, []string{"1", "2"}, " \t最"))
 
 }
 
