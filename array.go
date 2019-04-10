@@ -133,6 +133,43 @@ OUTER:
 	return rst.Slice()
 }
 
+// IArrFoldRep : ({"a", "b", "a"}, "[]")" => {[]"a", "b"}
+//               ({"a", "b", "a"}, "[i]")" => {[2]"a", "b"}
+func IArrFoldRep(arr IArr, style string) (slice interface{}) {
+	switch arr.(type) {
+	case Strs:
+		mItemCnt := map[string]int{}
+		L := arr.Len()
+		for i := 0; i < L; i++ {
+			a := arr.At(i).(string)
+			if _, ok := mItemCnt[a]; ok {
+				mItemCnt[a]++
+			} else {
+				mItemCnt[a] = 1
+			}
+		}
+
+		rst := IArrRmRep(arr).([]string)
+		L = len(rst)
+		for i := 0; i < L; i++ {
+			r := rst[i]
+			n := mItemCnt[r]
+			if n > 1 {
+				switch style {
+				case "[n]", "[i]":
+					rst[i] = fSf("[%d]%v", n, r)
+				case "[]", "":
+					rst[i] = fSf("[]%v", r)
+				}
+			}
+		}
+		return rst
+
+	default:
+		panic("Now, only <Strs> can yield folded <[]string>")
+	}
+}
+
 // IArrCtns :
 func IArrCtns(arr IArr, others ...interface{}) bool {
 	for _, oa := range others {

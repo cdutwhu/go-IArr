@@ -17,6 +17,7 @@ type IArr interface {
 	Swap(int, int)
 	Less(int, int) bool
 	At(int) interface{}
+	Set(int, interface{})
 }
 
 var FunSortLess func(interface{}, interface{}) bool
@@ -30,6 +31,10 @@ func (arr GArr) Len() int {
 }
 func (arr GArr) At(i int) interface{} {
 	return arr[i]
+}
+func (arr GArr) Set(i int, v interface{}) {
+	PC(i < 0 || i >= arr.Len(), fEf("Index out of range"))
+	arr[i] = v
 }
 func (arr GArr) Swap(i, j int) {
 	arr[i], arr[j] = arr[j], arr[i]
@@ -65,6 +70,10 @@ func (arr Strs) Swap(i, j int) {
 func (arr Strs) Less(i, j int) bool {
 	return FunSortLess(arr[i], arr[j])
 }
+func (arr Strs) Set(i int, v interface{}) {
+	PC(i < 0 || i >= arr.Len(), fEf("Index out of range"))
+	arr[i] = v.(string)
+}
 
 // ********************************************************************** int
 
@@ -81,6 +90,10 @@ func (arr I32s) Swap(i, j int) {
 }
 func (arr I32s) Less(i, j int) bool {
 	return FunSortLess(arr[i], arr[j])
+}
+func (arr I32s) Set(i int, v interface{}) {
+	PC(i < 0 || i >= arr.Len(), fEf("Index out of range"))
+	arr[i] = v.(int)
 }
 
 // ********************************************************************** int64
@@ -99,6 +112,10 @@ func (arr I64s) Swap(i, j int) {
 func (arr I64s) Less(i, j int) bool {
 	return FunSortLess(arr[i], arr[j])
 }
+func (arr I64s) Set(i int, v interface{}) {
+	PC(i < 0 || i >= arr.Len(), fEf("Index out of range"))
+	arr[i] = v.(int64)
+}
 
 // ********************************************************************** float
 
@@ -115,6 +132,10 @@ func (arr F32s) Swap(i, j int) {
 }
 func (arr F32s) Less(i, j int) bool {
 	return FunSortLess(arr[i], arr[j])
+}
+func (arr F32s) Set(i int, v interface{}) {
+	PC(i < 0 || i >= arr.Len(), fEf("Index out of range"))
+	arr[i] = v.(float32)
 }
 
 // ********************************************************************** float64
@@ -133,6 +154,10 @@ func (arr F64s) Swap(i, j int) {
 func (arr F64s) Less(i, j int) bool {
 	return FunSortLess(arr[i], arr[j])
 }
+func (arr F64s) Set(i int, v interface{}) {
+	PC(i < 0 || i >= arr.Len(), fEf("Index out of range"))
+	arr[i] = v.(float64)
+}
 
 // ********************************************************************** rune
 
@@ -149,4 +174,8 @@ func (arr C32s) Swap(i, j int) {
 }
 func (arr C32s) Less(i, j int) bool {
 	return FunSortLess(arr[i], arr[j])
+}
+func (arr C32s) Set(i int, v interface{}) {
+	PC(i < 0 || i >= arr.Len(), fEf("Index out of range"))
+	arr[i] = v.(rune)
 }

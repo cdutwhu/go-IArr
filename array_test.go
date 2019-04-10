@@ -7,9 +7,17 @@ import (
 
 func TestSearch(t *testing.T) {
 	// arr := I32s{1, 2, 3, 4, 5}
-	// arr := Strs{"a", "b", "c", "d", "b"}
+
+	arr1 := Strs{"a", "b", "c", "c", "a", "D", "b", "A"}
+	rst11 := IArrFoldRep(arr1, "[i]").([]string)
+	fPln(rst11)
 
 	arr := F64s{1, 2, 3, 4, 5.5, 1, 6, 7, 4}
+	fPln(arr)
+
+	arr.Set(4, 5.777)
+	fPln(arr)
+
 	fPln(IArrEleIn(float64(3), arr))
 
 	ok1, index, rst1 := IArrSearchOne(arr, func(i int, a interface{}) (bool, interface{}) { return a == float64(4), "junk" })
