@@ -10,18 +10,26 @@ const (
 	ALL     = MaxInt
 	TORANGE = 2048
 	LAST    = ALL
+)
 
-	QSingle QFlag = 1 // QSingle : single quotes   ''
-	QDouble QFlag = 2 // QDouble : double quotes   ""
+const (
+	ASCII EnCo = iota
+	UTF8
+)
 
-	BRound  BFlag = 1 // BRound : round brackets   ()
-	BBox    BFlag = 2 // BBox : box brackets       []
-	BSquare BFlag = 2 // BSquare : square brackets []
-	BCurly  BFlag = 3 // BCurly : curly brackets   {}
-	BAngle  BFlag = 4 // BAngle : angle brackets   <>
+const (
+	QSingle QFlag = 1 << iota // QSingle : single quotes   ''
+	QDouble                   // QDouble : double quotes   ""
+	QAll
+)
 
-	ASCII EnCo = 1
-	UTF8  EnCo = 2
+const (
+	BRound BFlag = 1 << iota // BRound : round brackets   ()
+	BBox                     // BBox : box brackets       []
+	BCurly                   // BCurly : curly brackets   {}
+	BAngle                   // BAngle : angle brackets   <>
+	BAll
+	BSquare BFlag = BBox // BSquare : square brackets []
 )
 
 var (

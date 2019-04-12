@@ -201,8 +201,8 @@ func TestMakeQuotes(t *testing.T) {
 }
 
 func TestRemoveQuotes(t *testing.T) {
-	fPln(Str("'abc'").RmQuotes(QSingle))
-	fPln(Str("\" abc'").RmQuotes(QDouble))
+	fPln(Str("'abc'").RmQuotes(QDouble, QSingle))
+	fPln(Str("' abc'").RmQuotes(QAll))
 }
 
 func TestMakeBrackets(t *testing.T) {
@@ -212,9 +212,9 @@ func TestMakeBrackets(t *testing.T) {
 }
 
 func TestRemoveBrackets(t *testing.T) {
-	fPln(Str("<abc>").RmBrackets(BAngle))
+	fPln(Str("<abc>").RmBrackets(BAll))
 	fPln(Str("[abc]").RmBrackets(BBox))
-	fPln(Str("{abc}").RmBrackets(BBox))
+	fPln(Str("{abc}").RmBrackets(BAll))
 }
 
 func TestIndices(t *testing.T) {

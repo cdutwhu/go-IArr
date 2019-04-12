@@ -240,7 +240,7 @@ func (s Str) BeCoveredInMapSIKeys(m map[string]int) (bool, int) {
 // CoverAnyKeyInMapSI :                                                                            &
 func (s Str) CoverAnyKeyInMapSI(m map[string]int) (bool, string, int) {
 	for k, v := range m {
-		if s.Contains(k) { 
+		if s.Contains(k) {
 			return true, k, v
 		}
 	}
@@ -255,13 +255,25 @@ func (s Str) MkBrackets(f BFlag) Str {
 }
 
 // RmBrackets : e.g. "(ABC)" => "ABC"                                                              &
-func (s Str) RmBrackets(f BFlag) Str {
-	bracketL := CaseAssign(f, BRound, BBox, BSquare, BCurly, BAngle, "(", "[", "[", "{", "<").(string)
-	bracketR := CaseAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ")", "]", "]", "}", ">").(string)
-	if s.HP(bracketL) && s.HS(bracketR) {
-		return s.S(1, ALL-1)
+func (s Str) RmBrackets(bfs ...BFlag) Str {
+	if bfs[0] == BAll {
+		bfs = []BFlag{BRound, BBox, BSquare, BCurly, BAngle}
+	}
+	for _, f := range bfs {
+		bracketL := CaseAssign(f, BRound, BBox, BSquare, BCurly, BAngle, "(", "[", "[", "{", "<").(string)
+		bracketR := CaseAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ")", "]", "]", "}", ">").(string)
+		if s.HP(bracketL) && s.HS(bracketR) {
+			return s.S(1, ALL-1)
+		}
 	}
 	return s
+
+	// bracketL := CaseAssign(f, BRound, BBox, BSquare, BCurly, BAngle, "(", "[", "[", "{", "<").(string)
+	// bracketR := CaseAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ")", "]", "]", "}", ">").(string)
+	// if s.HP(bracketL) && s.HS(bracketR) {
+	// 	return s.S(1, ALL-1)
+	// }
+	// return s
 }
 
 // QuotePairCount :
@@ -380,12 +392,23 @@ func (s Str) MkQuotes(f QFlag) Str {
 }
 
 // RmQuotes : Remove single or double Quotes from a string. If no quotations, do nothing           &
-func (s Str) RmQuotes(f QFlag) Str {
-	quote := CaseAssign(f, QSingle, QDouble, "'", "\"").(string)
-	if s.HP(quote) && s.HS(quote) {
-		return s.S(1, ALL-1)
+func (s Str) RmQuotes(qfs ...QFlag) Str {
+	if qfs[0] == QAll {
+		qfs = []QFlag{QSingle, QDouble}
+	}
+	for _, f := range qfs {
+		quote := CaseAssign(f, QSingle, QDouble, "'", "\"").(string)
+		if s.HP(quote) && s.HS(quote) {
+			return s.S(1, ALL-1)
+		}
 	}
 	return s
+
+	// quote := CaseAssign(f, QSingle, QDouble, "'", "\"").(string)
+	// if s.HP(quote) && s.HS(quote) {
+	// 	return s.S(1, ALL-1)
+	// }
+	// return s
 }
 
 // MkPrefix : e.g. "ABC"("abc") => "abcABC"                                                        &
@@ -636,7 +659,7 @@ func (s Str) KeyValueMap(delimiter, assign, terminator rune) (r map[string]strin
 		str = Sstr.S(0, pt)
 	}
 	for _, kv := range sFF(str.V(), func(c rune) bool { return c == delimiter }) {
-		if Str(kv).Contains(sAssign) { 
+		if Str(kv).Contains(sAssign) {
 			kvpair := sSpl(kv, sAssign)
 			r[kvpair[0]] = Str(kvpair[1]).RmQuotes(QDouble).V()
 		}
