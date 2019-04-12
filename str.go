@@ -166,6 +166,11 @@ func (s Str) Repeat(n int, sep string) Str {
 	return Str(strings.Join(strs, sep))
 }
 
+// Contains :
+func (s Str) Contains(substr string) bool {
+	return sCtn(s.V(), substr)
+}
+
 // HasAny : e.g. "ABC"('A', 'M') => true                                                     $
 func (s Str) HasAny(cks ...rune) bool {
 	for _, c := range s {
@@ -225,7 +230,7 @@ func (s Str) InMapSSValues(m map[string]string) (bool, string) {
 // BeCoveredInMapSIKeys : check if at least one map(string)key value can cover the calling string  &
 func (s Str) BeCoveredInMapSIKeys(m map[string]int) (bool, int) {
 	for k, v := range m {
-		if sCtn(k, s.V()) {
+		if Str(k).Contains(s.V()) {
 			return true, v
 		}
 	}
@@ -235,7 +240,7 @@ func (s Str) BeCoveredInMapSIKeys(m map[string]int) (bool, int) {
 // CoverAnyKeyInMapSI :                                                                            &
 func (s Str) CoverAnyKeyInMapSI(m map[string]int) (bool, string, int) {
 	for k, v := range m {
-		if sCtn(s.V(), k) {
+		if s.Contains(k) { 
 			return true, k, v
 		}
 	}
@@ -631,7 +636,7 @@ func (s Str) KeyValueMap(delimiter, assign, terminator rune) (r map[string]strin
 		str = Sstr.S(0, pt)
 	}
 	for _, kv := range sFF(str.V(), func(c rune) bool { return c == delimiter }) {
-		if sCtn(kv, sAssign) {
+		if Str(kv).Contains(sAssign) { 
 			kvpair := sSpl(kv, sAssign)
 			r[kvpair[0]] = Str(kvpair[1]).RmQuotes(QDouble).V()
 		}

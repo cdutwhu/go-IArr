@@ -183,7 +183,7 @@ func TestRemoveBlankNear(t *testing.T) {
 
 func TestKeyValueMap(t *testing.T) {
 	fPln(Str(`<abc a =	"最dd"  c最	= 	fff>>>>>`).KeyValueMap(' ', '=', 'T'))
-	fPln(Str(`<abc a最 	: 	"dd" 最 c   :			最fff>>>>>最`).KeyValueMap(' ', ':', 'T'))
+	fPln(Str(`<abc a最 	: 	"dd" 最 c   :	T		最fffT>>>>>最`).KeyValueMap(' ', ':', 'T'))
 }
 
 func TestKeyValuePair(t *testing.T) {
