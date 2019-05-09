@@ -821,3 +821,53 @@ func (s Str) FieldsSeqCtn(str, sep string) bool {
 	gArr1 := IArr2GArr(Strs(sArr1))
 	return IArrSeqCtns(Strs(sArr0), gArr1...)
 }
+
+// SplitEx :
+func (s Str) SplitEx(strSep, itemSep, r1AEType, r2AEType string) (r1, r2 interface{}) {
+
+	end := false
+	ss1, ss2 := []string{}, []string{}
+	for _, item := range sSpl(s.V(), strSep) {
+		coms := sSpl(item, itemSep)
+		switch len(coms) {
+		case 2:
+			ss1, ss2 = append(ss1, coms[0]), append(ss2, coms[1])
+			PC(end, fEf("error format string to SplitEx"))
+		case 1:
+			ss1 = append(ss1, coms[0])
+			end = true
+		}
+	}
+
+	switch r1AEType {
+	case "string":
+		r1 = ss1
+	case "int":
+		{
+			a1 := make([]int, len(ss1))
+			for i, s1 := range ss1 {
+				a1[i] = Str(s1).ToInt()
+			}
+			r1 = a1
+		}
+	default:
+		panic("not implemented " + r1AEType + " in StrsSplitEx r1AEType")
+	}
+
+	switch r2AEType {
+	case "string":
+		r2 = ss2
+	case "int":
+		{
+			a2 := make([]int, len(ss2))
+			for i, s2 := range ss2 {
+				a2[i] = Str(s2).ToInt()
+			}
+			r2 = a2
+		}
+	default:
+		panic("not implemented " + r2AEType + " in StrsSplitEx r2AEType")
+	}
+
+	return
+}

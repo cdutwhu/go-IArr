@@ -94,3 +94,9 @@ func TestInterSecANDUnion(t *testing.T) {
 	r = IArrUnion(arr1, arr2)
 	fPln(r.([]string))
 }
+
+func TestIArrStrJoinEx(t *testing.T) {
+	s1 := []string{"a", "b", "c", "d"}
+	s2 := []string{"1", "2", "3"}
+	fPln(IArrStrJoinEx(Strs(s1), Strs(s2), "#", " ~ "))
+}

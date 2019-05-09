@@ -293,3 +293,10 @@ func TestFieldsSeqContain(t *testing.T) {
 func TestIsUUID(t *testing.T) {
 	fPln(Str("fbd3036f-0f1c-4e98-b71c-d4cd61213f93").IsUUID())
 }
+
+func TestSplitEx(t *testing.T) {
+	S := Str("a#1, b#2, c")
+	r1, r2 := S.SplitEx(", ", "#", "string", "int")
+	fPln(r1)
+	fPln(r2)
+}

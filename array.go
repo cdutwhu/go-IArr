@@ -240,3 +240,31 @@ NEXT:
 	}
 	return rst.Slice()
 }
+
+// IArrStrJoinEx :
+func IArrStrJoinEx(s1, s2 IArr, itemSep, strSep string) string {
+	L1, L2 := s1.Len(), s2.Len()
+	rmax, _ := Max(I32s{L1, L2})
+	rmin, _ := Min(I32s{L1, L2}, "")
+	Lmax, Lmin := rmax.(int), rmin.(int)
+
+	rstArr := make([]string, Lmax)
+	for i := 0; i < Lmin; i++ {
+		rstArr[i] = fSf("%s%s%s", s1.At(i), itemSep, s2.At(i))
+	}
+	if L1 == L2 {
+		return sJ(rstArr, strSep)
+	}
+
+	switch {
+	case Lmax == L1:
+		for i := L2; i < L1; i++ {
+			rstArr[i] = s1.At(i).(string)
+		}
+	case Lmax == L2:
+		for i := L1; i < L2; i++ {
+			rstArr[i] = s2.At(i).(string)
+		}
+	}
+	return sJ(rstArr, strSep)
+}
