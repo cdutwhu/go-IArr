@@ -6,6 +6,11 @@ import (
 )
 
 func TestSearch(t *testing.T) {
+
+	rst := IArrMake("Strs", 3, "hello")
+	rst111 := []string(rst.(Strs))
+	fPln(rst111)
+
 	// arr := I32s{1, 2, 3, 4, 5}
 
 	arr1 := Strs{"a", "b", "c", "c", "a", "D", "b", "A"}

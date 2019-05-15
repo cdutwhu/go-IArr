@@ -5,6 +5,32 @@ import (
 	"sort"
 )
 
+// IArrMake :
+func IArrMake(arrType string, n int, v interface{}) interface{} {
+	switch arrType {
+	case "Strs", "[]string":
+		rst := make([]string, n)
+		for i := 0; i < n; i++ {
+			rst[i] = v.(string)
+		}
+		return Strs(rst)
+	case "I32s", "[]int":
+		rst := make([]int, n)
+		for i := 0; i < n; i++ {
+			rst[i] = v.(int)
+		}
+		return I32s(rst)
+	case "I64s", "[]int64":
+		rst := make([]int64, n)
+		for i := 0; i < n; i++ {
+			rst[i] = v.(int64)
+		}
+		return I64s(rst)
+	default:
+		panic(arrType + " is not implemented")
+	}
+}
+
 // IArr2GArr :
 func IArr2GArr(arr IArr) (garr []interface{}) {
 	L := arr.Len()
