@@ -661,7 +661,8 @@ func (s Str) KeyValueMap(delimiter, assign, terminator rune) (r map[string]strin
 	for _, kv := range sFF(str.V(), func(c rune) bool { return c == delimiter }) {
 		if Str(kv).Contains(sAssign) {
 			kvpair := sSpl(kv, sAssign)
-			r[kvpair[0]] = Str(kvpair[1]).RmQuotes(QDouble).V()
+			kvpair[0] = Str(kvpair[0]).T(BLANK).V()
+			r[kvpair[0]] = Str(kvpair[1]).T(BLANK).RmQuotes(QDouble).V()
 		}
 	}
 	return
