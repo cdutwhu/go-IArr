@@ -14,6 +14,7 @@ var (
 	sCtns = strings.Contains
 	sCnt  = strings.Count
 	sFF   = strings.FieldsFunc
+	sRplc = strings.Replace
 
 	sc2Int   = strconv.ParseInt
 	sc2Float = strconv.ParseFloat

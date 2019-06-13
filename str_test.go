@@ -12,6 +12,7 @@ func TestBasic(t *testing.T) {
 	fPln(s.SetEnC())
 
 	fPln(s.IdxAnyInRange(" ", []string{"1", "2", "3"}, ""))
+	fPln(s.Replace("最", ""))
 	return
 
 	if s.L() != 47 {

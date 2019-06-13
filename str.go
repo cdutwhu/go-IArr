@@ -85,6 +85,11 @@ func (s Str) SegRep(from, to int, seg string) Str {
 	return Str(left.V() + seg + right.V())
 }
 
+// Replace : replace all old pieces to new pieces
+func (s Str) Replace(old, new string) Str {
+	return Str(sRplc(s.V(), old, new, -1))
+}
+
 // C : the p position's character                            $
 func (s Str) C(p int) rune {
 	d, L := LAST-p, s.L()
