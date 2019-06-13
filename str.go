@@ -168,7 +168,7 @@ func (s Str) Repeat(n int, sep string) Str {
 
 // Contains :
 func (s Str) Contains(substr string) bool {
-	return sCtn(s.V(), substr)
+	return sCtns(s.V(), substr)
 }
 
 // HasAny : e.g. "ABC"('A', 'M') => true                                                     $
@@ -717,6 +717,21 @@ AGAIN:
 		goto AGAIN
 	}
 	return
+}
+
+// IdxAnyInRange :
+func (s Str) IdxAnyInRange(prefix string, strs []string, suffix string) int {
+	ps := []int{}
+	for _, str := range strs {
+		aim := prefix + str + suffix
+		if p := s.Idx(aim); p >= 0 {
+			ps = append(ps, p)
+		}
+	}
+	if p, _ := Min(I32s(ps), ""); p != nil {
+		return p.(int)
+	}
+	return -1
 }
 
 // Indices2StrsIgnore :
