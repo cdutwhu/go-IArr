@@ -9,12 +9,13 @@ import (
 )
 
 var (
-	sJ    = strings.Join
-	sSpl  = strings.Split
-	sCtns = strings.Contains
-	sCnt  = strings.Count
-	sFF   = strings.FieldsFunc
-	sRplc = strings.Replace
+	sJ       = strings.Join
+	sSpl     = strings.Split
+	sCtns    = strings.Contains
+	sCnt     = strings.Count
+	sFF      = strings.FieldsFunc
+	sRplc    = strings.Replace
+	sRplcAll = strings.ReplaceAll
 
 	sc2Int   = strconv.ParseInt
 	sc2Float = strconv.ParseFloat
