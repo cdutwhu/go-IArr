@@ -7,8 +7,8 @@ import (
 	"unicode/utf8"
 )
 
-// ASCIIToUTF8 :
-func ASCIIToUTF8(astr string) string {
+// ASCIIToOri :
+func ASCIIToOri(astr string) string {
 	start, end, base := "^", "$", 36
 	r, _ := regexp.Compile(`\` + start + `[a-z0-9]?[a-z0-9]?[a-z0-9]?[a-z0-9]\` + end)
 	for codedarea := r.FindString(astr); codedarea != ""; codedarea = r.FindString(astr) {
