@@ -27,7 +27,7 @@ var (
 	PC         = u.PanicOnCondition
 	IF         = u.IF
 	Must       = u.Must
-	CaseAssign = u.CaseAssign
+	MatchAssign = u.MatchAssign
 )
 
 const (
