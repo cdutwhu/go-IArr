@@ -155,6 +155,16 @@ func (s Str) ToInt() int {
 	return int(s.ToInt64())
 }
 
+// ToLower :
+func (s Str) ToLower() Str {
+	return Str(strings.ToLower(s.V()))
+}
+
+// ToUpper :
+func (s Str) ToUpper() Str {
+	return Str(strings.ToUpper(s.V()))
+}
+
 // ******************************************************************************************************* //
 
 // DefValue : if is empty, assign it with input string, otherwise keep its value             $

@@ -8,6 +8,7 @@ import (
 func TestBasic(t *testing.T) {
 
 	s := Str(`Strait ’ Islander 最 Peoples  3’2  最 connections最`)
+	fPln(s.ToLower())
 	// s := Str(`Strait , Islander , Peoples 1,2  , connections,`)
 	fPln(s.SetEnC())
 
