@@ -81,5 +81,5 @@ func SlcD2ToD1(slc2d interface{}) (interface{}, bool) {
 		}
 		sRst.Index(i).Set(reflect.ValueOf(v1d.Index(0).Interface()))
 	}
-	return sRst, true
+	return sRst.Interface(), true
 }

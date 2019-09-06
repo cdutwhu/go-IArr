@@ -28,4 +28,9 @@ func TestSortIntArr2D(t *testing.T) {
 	fPln(SlcD2ToD1([][]string{{"abc"}, {"ghi"}, {"xxx"}, {}}))
 	fPln(SlcD2ToD1([][]int{{1}, {2}, {3}}))
 	fPln(SlcD2ToD1([][]int{{1}, {2}, {3, 4}}))
+
+	if a, ok := SlcD2ToD1([][]int{{1}, {2}, {3}, {4}}); ok {
+		b := a.([]int)
+		fPln(b)
+	}
 }
