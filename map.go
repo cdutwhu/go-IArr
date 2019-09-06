@@ -28,14 +28,10 @@ func GetMapKVs(m interface{}) (interface{}, interface{}) {
 	if L := len(keys); L > 0 {
 		kType := reflect.TypeOf(keys[0].Interface())
 		kRst := reflect.MakeSlice(reflect.SliceOf(kType), L, L)
-
 		vType := reflect.TypeOf(v.MapIndex(keys[0]).Interface())
 		vRst := reflect.MakeSlice(reflect.SliceOf(vType), L, L)
-
-		// vRst := []interface{}{}
 		for i, k := range keys {
 			kRst.Index(i).Set(reflect.ValueOf(k.Interface()))
-			// vRst = append(vRst, v.MapIndex(k))
 			vRst.Index(i).Set(reflect.ValueOf(v.MapIndex(k).Interface()))
 		}
 		return kRst.Interface(), vRst.Interface()

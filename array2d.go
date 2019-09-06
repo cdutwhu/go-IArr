@@ -1,6 +1,9 @@
 package wrappers
 
-import "sort"
+import (
+	"reflect"
+	"sort"
+)
 
 // Col :
 func Col(A2D [][]int, iCol int) (col []int) {
@@ -51,4 +54,32 @@ func SortIntArr2D(A2D [][]int, sortType string) {
 		}
 		return false
 	})
+}
+
+// SlcD2ToD1 :
+func SlcD2ToD1(slc2d interface{}) (interface{}, bool) {
+	v2d := reflect.ValueOf(slc2d)
+	PC(v2d.Kind() != reflect.Slice, fEf("NOT A SLICE!"))
+	l2 := v2d.Len()
+	if l2 == 0 {
+		return nil, false
+	}
+	slc2 := make([]interface{}, l2)
+	for i := 0; i < l2; i++ {
+		slc2[i] = v2d.Index(i).Interface()
+	}
+	var sRst reflect.Value
+	for i, ele := range slc2 {
+		v1d := reflect.ValueOf(ele)
+		PC(v1d.Kind() != reflect.Slice, fEf("NOT A SLICE!"))
+		if i == 0 {
+			sType := reflect.TypeOf(v1d.Index(0).Interface())
+			sRst = reflect.MakeSlice(reflect.SliceOf(sType), l2, l2)
+		}
+		if v1d.Len() != 1 {
+			return nil, false
+		}
+		sRst.Index(i).Set(reflect.ValueOf(v1d.Index(0).Interface()))
+	}
+	return sRst, true
 }

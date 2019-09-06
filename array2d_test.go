@@ -21,4 +21,11 @@ func TestSortIntArr2D(t *testing.T) {
 
 	SortIntArr2D(A2D, "asc")
 	fPln(A2D)
+
+	/***************************************/
+
+	fPln(SlcD2ToD1([][]string{{"abc"}, {"ghi"}, {"xxx"}}))
+	fPln(SlcD2ToD1([][]string{{"abc"}, {"ghi"}, {"xxx"}, {}}))
+	fPln(SlcD2ToD1([][]int{{1}, {2}, {3}}))
+	fPln(SlcD2ToD1([][]int{{1}, {2}, {3, 4}}))
 }
