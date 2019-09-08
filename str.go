@@ -346,8 +346,8 @@ func (s Str) BracketsPos(f BFlag, level, index int) (str Str, left, right int) {
 		i++
 	}
 
-	if !found { //       ** not break, come to here, not found **
-		return "", 0, 0
+	if !found { // ** not break, come to here, not found **
+		return "", -1, -1
 	}
 
 	return s.S(left, right+1), left, right
