@@ -264,8 +264,8 @@ func (s Str) CoverAnyKeyInMapSI(m map[string]int) (bool, string, int) {
 
 // MkBrackets : e.g. "ABC"(BRound) => "(ABC)"                                                      &
 func (s Str) MkBrackets(f BFlag) Str {
-	bracketL := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, "(", "[", "[", "{", "<").(string)
-	bracketR := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ")", "]", "]", "}", ">").(string)
+	bracketL := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, "(", "[", "[", "{", "<", "").(string)
+	bracketR := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ")", "]", "]", "}", ">", "").(string)
 	return IF(s.HP(bracketL) && s.HS(bracketR), s, Str(bracketL+s.V()+bracketR)).(Str)
 }
 
@@ -275,16 +275,16 @@ func (s Str) RmBrackets(bfs ...BFlag) Str {
 		bfs = []BFlag{BRound, BBox, BSquare, BCurly, BAngle}
 	}
 	for _, f := range bfs {
-		bracketL := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, "(", "[", "[", "{", "<").(string)
-		bracketR := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ")", "]", "]", "}", ">").(string)
+		bracketL := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, "(", "[", "[", "{", "<", "").(string)
+		bracketR := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ")", "]", "]", "}", ">", "").(string)
 		if s.HP(bracketL) && s.HS(bracketR) {
 			return s.S(1, ALL-1)
 		}
 	}
 	return s
 
-	// bracketL := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, "(", "[", "[", "{", "<").(string)
-	// bracketR := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ")", "]", "]", "}", ">").(string)
+	// bracketL := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, "(", "[", "[", "{", "<", "").(string)
+	// bracketR := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ")", "]", "]", "}", ">", "").(string)
 	// if s.HP(bracketL) && s.HS(bracketR) {
 	// 	return s.S(1, ALL-1)
 	// }
@@ -293,13 +293,13 @@ func (s Str) RmBrackets(bfs ...BFlag) Str {
 
 // QuotePairCount :
 func (s Str) QuotePairCount(f QFlag) int {
-	quote := MatchAssign(f, QSingle, QDouble, '\'', '"').(rune)
+	quote := MatchAssign(f, QSingle, QDouble, '\'', '"', ' ').(rune)
 	return sCnt(s.V(), string(quote)) / 2
 }
 
 // QuotesPos : index from 1                                                                        &
 func (s Str) QuotesPos(f QFlag, index int) (str Str, left, right int) {
-	quote := MatchAssign(f, QSingle, QDouble, '\'', '"').(rune)
+	quote := MatchAssign(f, QSingle, QDouble, '\'', '"', ' ').(rune)
 	cnt, left, right := 0, -1, -1
 	i := 0
 	for _, c := range s {
@@ -323,8 +323,8 @@ func (s Str) QuotesPos(f QFlag, index int) (str Str, left, right int) {
 
 // BracketsPos : level from 1, index from 1, if index > count, get the last one                    &
 func (s Str) BracketsPos(f BFlag, level, index int) (str Str, left, right int) {
-	bracketL := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, '(', '[', '[', '{', '<').(rune)
-	bracketR := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ')', ']', ']', '}', '>').(rune)
+	bracketL := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, '(', '[', '[', '{', '<', ' ').(rune)
+	bracketR := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ')', ']', ']', '}', '>', ' ').(rune)
 	curLevel, curIndex := 0, 0
 
 	found := false
@@ -355,8 +355,8 @@ func (s Str) BracketsPos(f BFlag, level, index int) (str Str, left, right int) {
 
 // BracketPairCount : only count top level                                                         &
 func (s Str) BracketPairCount(f BFlag) (count int) {
-	bracketL := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, '(', '[', '[', '{', '<').(rune)
-	bracketR := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ')', ']', ']', '}', '>').(rune)
+	bracketL := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, '(', '[', '[', '{', '<', ' ').(rune)
+	bracketR := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ')', ']', ']', '}', '>', ' ').(rune)
 	level, inflag := 0, false
 	for _, c := range s {
 		if c == bracketL {
@@ -380,8 +380,8 @@ func (s Str) BracketPairCount(f BFlag) (count int) {
 
 // BracketDepth :                                                                                  &
 func (s Str) BracketDepth(f BFlag, pos int) int {
-	bracketL := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, '(', '[', '[', '{', '<').(rune)
-	bracketR := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ')', ']', ']', '}', '>').(rune)
+	bracketL := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, '(', '[', '[', '{', '<', ' ').(rune)
+	bracketR := MatchAssign(f, BRound, BBox, BSquare, BCurly, BAngle, ')', ']', ']', '}', '>', ' ').(rune)
 	level, found := 0, false
 	i := 0
 	for _, c := range s {
@@ -402,7 +402,7 @@ func (s Str) BracketDepth(f BFlag, pos int) int {
 
 // MkQuotes : e.g. "ABC"(QSingle) => "'ABC'"                                                       &
 func (s Str) MkQuotes(f QFlag) Str {
-	quote := MatchAssign(f, QSingle, QDouble, "'", "\"").(string)
+	quote := MatchAssign(f, QSingle, QDouble, "'", "\"", "").(string)
 	return IF(s.HP(quote) && s.HS(quote), s, Str(quote+s.V()+quote)).(Str)
 }
 
@@ -412,14 +412,14 @@ func (s Str) RmQuotes(qfs ...QFlag) Str {
 		qfs = []QFlag{QSingle, QDouble}
 	}
 	for _, f := range qfs {
-		quote := MatchAssign(f, QSingle, QDouble, "'", "\"").(string)
+		quote := MatchAssign(f, QSingle, QDouble, "'", "\"", "").(string)
 		if s.HP(quote) && s.HS(quote) {
 			return s.S(1, ALL-1)
 		}
 	}
 	return s
 
-	// quote := MatchAssign(f, QSingle, QDouble, "'", "\"").(string)
+	// quote := MatchAssign(f, QSingle, QDouble, "'", "\"", "").(string)
 	// if s.HP(quote) && s.HS(quote) {
 	// 	return s.S(1, ALL-1)
 	// }
