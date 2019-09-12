@@ -17,6 +17,7 @@ var (
 	sRplc       = strings.Replace
 	sRplcAll    = strings.ReplaceAll
 	sc2Int      = strconv.ParseInt
+	sc2Uint     = strconv.ParseUint
 	sc2Float    = strconv.ParseFloat
 	fPln        = fmt.Println
 	fSf         = fmt.Sprintf

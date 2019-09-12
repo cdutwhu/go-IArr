@@ -150,9 +150,19 @@ func (s Str) ToInt64() int64 {
 	return Must(sc2Int(s.V(), 10, 64)).(int64)
 }
 
+// ToUint64 :
+func (s Str) ToUint64() uint64 {
+	return Must(sc2Uint(s.V(), 10, 64)).(uint64)
+}
+
 // ToInt :                                                   $
 func (s Str) ToInt() int {
 	return int(s.ToInt64())
+}
+
+// ToUint :
+func (s Str) ToUint() uint {
+	return uint(s.ToUint64())
 }
 
 // ToLower :
