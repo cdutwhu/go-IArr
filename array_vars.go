@@ -179,3 +179,24 @@ func (arr C32s) Set(i int, v interface{}) {
 	PC(i < 0 || i >= arr.Len(), fEf("Index out of range"))
 	arr[i] = v.(rune)
 }
+
+// ********************************************************************** byte
+
+type C8s []byte
+
+func (arr C8s) Len() int {
+	return len(arr)
+}
+func (arr C8s) At(i int) interface{} {
+	return arr[i]
+}
+func (arr C8s) Swap(i, j int) {
+	arr[i], arr[j] = arr[j], arr[i]
+}
+func (arr C8s) Less(i, j int) bool {
+	return FunSortLess(arr[i], arr[j])
+}
+func (arr C8s) Set(i int, v interface{}) {
+	PC(i < 0 || i >= arr.Len(), fEf("Index out of range"))
+	arr[i] = v.(byte)
+}
