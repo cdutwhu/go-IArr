@@ -125,9 +125,29 @@ func (s Str) HP(prefix string) bool {
 	return strings.HasPrefix(s.V(), prefix)
 }
 
+// HPAny :
+func (s Str) HPAny(prefixes ...string) bool {
+	for _, prefix := range prefixes {
+		if s.HP(prefix) {
+			return true
+		}
+	}
+	return false
+}
+
 // HS : HasSuffix                                            $
 func (s Str) HS(suffix string) bool {
 	return strings.HasSuffix(s.V(), suffix)
+}
+
+// HSAny :
+func (s Str) HSAny(suffixes ...string) bool {
+	for _, suffix := range suffixes {
+		if s.HS(suffix) {
+			return true
+		}
+	}
+	return false
 }
 
 // T : strings.Trim                                          $
