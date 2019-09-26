@@ -883,6 +883,11 @@ func (s Str) FieldsSeqCtn(str, sep string) bool {
 	return IArrSeqCtns(Strs(sArr0), gArr1...)
 }
 
+// Count :
+func (s Str) Count(substr string) int {
+	return strings.Count(s.V(), substr)
+}
+
 // SplitEx :
 func (s Str) SplitEx(strSep, itemSep, r1AEType, r2AEType string) (r1, r2 interface{}) {
 
