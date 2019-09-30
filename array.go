@@ -50,7 +50,7 @@ func IArrEleIn(ele interface{}, arr IArr) bool {
 	a0 := arr.At(0)
 	tInput := reflect.TypeOf(ele)
 	tArrEle := reflect.TypeOf(a0)
-	PC(tInput != tArrEle, fEf("input element is <%v>, arr's element type is <%v>. Cannot compare!", tInput, tArrEle))
+	pc(tInput != tArrEle, fEf("input element is <%v>, arr's element type is <%v>. Cannot compare!", tInput, tArrEle))
 
 	for i := 0; i < L; i++ {
 		a := arr.At(i)
