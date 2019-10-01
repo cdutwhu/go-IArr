@@ -23,7 +23,7 @@ func TestSearch(t *testing.T) {
 	arr.Set(4, 5.777)
 	fPln(arr)
 
-	fPln(IArrEleIn(float64(3), arr))
+	// fPln(IArrEleIn(float64(3), arr)) // removed, use u.XIn
 
 	ok1, index, rst1 := IArrSearchOne(arr, func(i int, a interface{}) (bool, interface{}) { return a == float64(4), "junk" })
 	if ok1 {
