@@ -490,6 +490,15 @@ func (s Str) RmTailFromLast(mark string) Str {
 	return s
 }
 
+// RmTailFromLastN : e.g. "AB.CD.EF"(".", 2) => "AB"
+func (s Str) RmTailFromLastN(mark string, iLast int) Str {
+	rst := s
+	for i := 0; i < iLast; i++ {
+		rst = rst.RmTailFromLast(mark)
+	}
+	return rst
+}
+
 // RmHeadToLast : e.g. "AB.CD.EF"(".") => "EF"                                                     &
 func (s Str) RmHeadToLast(mark string) Str {
 	mL := Str(mark).L()

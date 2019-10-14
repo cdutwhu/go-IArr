@@ -145,11 +145,12 @@ func TestRemoveSuffix(t *testing.T) {
 }
 
 func TestRmTailFromLast(t *testing.T) {
-	fPln(Str("a ~ sif ~ abc ~ ABC").RmTailFromLast(" ~ "))
+	fPln(Str("a~sif~abc~ABC").RmTailFromLast("~"))
+	fPln(Str("a~sif~abc~ABC").RmTailFromLastN("~", 2))
 }
 
 func TestRmHeadToLast(t *testing.T) {
-	fPln(Str("a ~ sif ~ abc ~ ABC").RmHeadToLast(" ~ "))
+	fPln(Str("a~sif~abc~ABC").RmHeadToLast("~"))	
 }
 
 func TestRemoveBlankBefore(t *testing.T) {
